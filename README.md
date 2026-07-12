@@ -1,23 +1,28 @@
 # Airline Passenger Satisfaction Prediction ✈️
 
-A Machine Learning classification project to predict airline passenger satisfaction based on passenger demographics, travel information, flight experience, and service-related features.
+A Machine Learning classification project to predict airline passenger satisfaction based on passenger demographics, flight details, travel information, and service experience.
 
-The main objective of this project is to build machine learning models that can classify passengers as **Satisfied** or **Neutral/Dissatisfied** and discover the key factors influencing customer satisfaction.
+The objective of this project is to build machine learning models that classify passengers into:
+
+* **Satisfied**
+* **Neutral or Dissatisfied**
+
+and identify the main factors that influence airline customer satisfaction.
 
 ---
 
 # 📌 Project Overview
 
-Customer satisfaction is a critical factor in the airline industry. By analyzing passenger data and applying machine learning techniques, airlines can better understand customer expectations and improve their services.
+Customer satisfaction is one of the most important factors in the airline industry. Understanding passenger behavior and service experience can help airlines improve their customer experience and make data-driven decisions.
 
-This project includes:
+This project covers the complete machine learning workflow:
 
 * Data exploration
 * Data cleaning
 * Feature engineering
 * Data preprocessing
 * Feature scaling
-* Machine learning model training
+* Model training
 * Model evaluation
 * Feature importance analysis
 * Business insight visualization
@@ -26,71 +31,87 @@ This project includes:
 
 # 📂 Dataset
 
-The dataset contains airline passenger survey information, including:
+The dataset used in this project is the **Airline Passenger Satisfaction Dataset** from Kaggle.
 
-* Passenger demographics
-* Flight distance
-* Travel type
-* Customer loyalty status
-* Travel class
-* Service ratings
-* Delay information
-* Satisfaction status
+Dataset source:
 
-## Target Variable
+🔗 https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction
 
-The target variable is:
+After downloading the dataset, place the files in:
 
 ```text
-satisfaction
+data/raw/
 ```
 
-Encoding:
+Required files:
 
-| Original Value          | Encoded Value |
-| ----------------------- | ------------- |
-| satisfied               | 1             |
-| neutral or dissatisfied | 0             |
+```text
+train.csv
+test.csv
+```
 
 ---
 
-# 🔄 Project Workflow
+# 🗂️ Project Structure
+
+```text
+airline-passenger-satisfaction-prediction/
+
+│
+├── README.md
+│
+├── requirements.txt
+│
+├── notebooks/
+│   └── airline-passenger-satisfaction.ipynb
+│
+├── images/
+│   ├── confusion_matrix.png
+│   └── satisfaction.png
+│
+└── data/
+    └── raw/
+        ├── train.csv
+        └── test.csv
+```
+
+---
+
+# 🔄 Machine Learning Workflow
 
 ## 1. Data Loading
 
-The training and testing datasets were loaded using Pandas.
+The dataset was loaded using Pandas.
 
 Initial exploration included:
 
-* Dataset shape
-* Column names
+* Dataset dimensions
+* Feature names
 * Data types
-* Satisfaction distribution
+* Target distribution
 
 ---
 
-# 🧹 Data Cleaning
+# 🧹 Data Preprocessing
 
-The following preprocessing steps were performed:
-
-### Handling Missing Values
+## Handling Missing Values
 
 Rows containing missing values were removed.
 
-### Removing Unnecessary Columns
+## Removing Unnecessary Features
 
-The following columns were dropped:
+The following columns were removed:
 
 * `Unnamed: 0`
 * `id`
 
-because they do not contribute useful information for prediction.
+because they do not provide useful predictive information.
 
 ---
 
 # 🔢 Feature Engineering
 
-Categorical features were converted into numerical values.
+Categorical variables were transformed into numerical values.
 
 ## Gender
 
@@ -113,7 +134,7 @@ Business Travel → 1
 Personal Travel → 0
 ```
 
-## Satisfaction
+## Target Encoding
 
 ```text
 Satisfied → 1
@@ -132,7 +153,7 @@ Numerical features were standardized using:
 
 `StandardScaler`
 
-The following features were scaled:
+Scaled features:
 
 * Age
 * Flight Distance
@@ -143,7 +164,7 @@ The following features were scaled:
 
 # 🤖 Machine Learning Models
 
-Three classification algorithms were trained and compared:
+Three classification models were trained:
 
 ## Logistic Regression
 
@@ -153,7 +174,7 @@ A baseline linear classification algorithm.
 
 ## Random Forest Classifier
 
-An ensemble learning algorithm based on multiple decision trees.
+An ensemble model based on multiple decision trees.
 
 Parameters:
 
@@ -166,7 +187,7 @@ random_state = 42
 
 ## Gradient Boosting Classifier
 
-A boosting algorithm that improves prediction performance by combining multiple weak learners.
+A boosting algorithm that combines multiple weak learners to improve prediction accuracy.
 
 Parameters:
 
@@ -179,7 +200,7 @@ random_state = 42
 
 # 📈 Model Evaluation
 
-The models were evaluated using:
+Models were evaluated using:
 
 * Accuracy Score
 * Precision
@@ -187,7 +208,7 @@ The models were evaluated using:
 * F1-score
 * Classification Report
 
-The Random Forest model was selected for further analysis because of its strong performance.
+The Random Forest model was selected for additional analysis because of its strong performance.
 
 ---
 
@@ -195,18 +216,18 @@ The Random Forest model was selected for further analysis because of its strong 
 
 Feature importance was extracted from the Random Forest model to identify the most influential features affecting passenger satisfaction.
 
-Features with importance values greater than:
+Features with importance values:
 
 ```text
-0.01
+>= 0.01
 ```
 
-were selected.
+were selected for a reduced-feature model.
 
 The performance of:
 
-* Model using all features
-* Model using selected features
+* Full feature model
+* Selected feature model
 
 was compared.
 
@@ -216,47 +237,24 @@ was compared.
 
 ## Confusion Matrix
 
-The confusion matrix shows the classification performance of the final Random Forest model.
+The confusion matrix shows the performance of the final Random Forest classifier.
 
 ![Confusion Matrix](images/confusion_matrix.png)
 
 ---
 
-# 💡 Passenger Satisfaction Insights
+# 💡 Business Insights
 
-Business analysis was performed to understand the relationship between passenger satisfaction and different factors:
+Additional analysis was performed to understand the relationship between passenger satisfaction and different factors.
 
-* Type of Travel
-* Customer Type
-* Travel Class
-* Online Boarding Score
+The following insights were analyzed:
+
+* Satisfaction rate by travel type
+* Satisfaction rate by customer type
+* Satisfaction rate by travel class
+* Online boarding score relationship with satisfaction
 
 ![Passenger Satisfaction Analysis](images/satisfaction.png)
-
----
-
-# 📁 Project Structure
-
-```text
-airline-passenger-satisfaction-prediction/
-
-│
-├── README.md
-│
-├── notebooks/
-│   └── airline-passenger-satisfaction.ipynb
-│
-├── images/
-│   ├── confusion_matrix.png
-│   └── satisfaction.png
-│
-├── data/
-│   └── raw/
-│       ├── train.csv
-│       └── test.csv
-│
-└── requirements.txt
-```
 
 ---
 
@@ -285,6 +283,19 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
+Download the dataset from Kaggle and place:
+
+```text
+train.csv
+test.csv
+```
+
+inside:
+
+```text
+data/raw/
+```
+
 Open the notebook:
 
 ```text
@@ -297,13 +308,13 @@ Run all cells to reproduce the results.
 
 # 🚀 Future Improvements
 
-Future improvements could include:
+Possible improvements:
 
 * Hyperparameter tuning using GridSearchCV
 * Cross-validation
+* Model deployment using Streamlit
 * Saving trained models
-* Building a prediction API
-* Deploying the model using Streamlit
+* Creating an automated prediction pipeline
 
 ---
 
